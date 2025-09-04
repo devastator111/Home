@@ -1,0 +1,253 @@
+/*USE LINK IN HTML TO PREVENT FOUC*/
+body {
+  margin-top:100vh;
+  margin-left:0;
+  height:100%;
+  scrollbar-gutter:stable;
+  color:white;
+  
+}
+nav {
+  position:fixed;
+  left:10px;
+  top:200px;
+  z-index:2;
+  
+  
+}
+nav a {
+  color:white;
+  
+}
+nav ul {
+  text-indent:none;
+  list-style-type:none;
+  text-align:center;
+}
+
+.navIn {
+  animation:foldDown 0.8s forwards,
+  fadeIn 1s both;
+  animation-timeline:auto, scroll();
+  animation-range:auto, 0vh 100vh;
+}
+nav ul li {
+  padding:3px;
+  border:2px orange ridge;
+  border-radius:10px;
+  width:200px;
+  background-color:black;
+  margin-bottom:10px;
+  box-shadow:0px 3px 10px darkgray;
+  transform-origin:center left;
+  opacity:0;
+}
+nav ul li ul {
+  text-indent:none;
+  margin:0;
+  padding-left:0px;
+  margin-left:7px;
+  text-align:left;
+  animation:none;
+  display:none;
+}
+nav ul li:hover ul {
+  display:block;
+}
+nav ul li ul li:hover {
+  transition:text-indent 0.2s;
+  opacity:1;
+  text-indent:10px;
+}
+nav ul li ul li {
+  transition:text-indent 0.2s;
+  opacity:1;
+  text-indent:0;
+  width:calc(200px - 7px - 10px);
+  box-shadow:none;
+  animation:none;
+}
+html {
+  height: 100%;
+  scrollbar-gutter:stable;
+  scrollbar-color:rgb(255,0,0);
+  scrollbar-width:thin;
+}
+
+#dev {
+  height:200px;
+  margin-left:calc(50% - 100px);
+  opacity:0;
+  margin-bottom:1000px;
+}
+header {
+  
+  
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center bottom;
+  z-index:4;
+  animation: head linear forwards;
+  animation-timeline:scroll();
+  animation-range:0vh 75vh;
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index: 2;
+}
+footer * {
+  text-align:center;
+}
+h1, h2 { 
+  font-family:"Bona Nova SC";
+  font-weight:400;
+  
+  
+} 
+h1 {
+  animation: title linear both;
+  animation-range:0vh 75vh;
+  animation-timeline:scroll();
+  text-align:center;
+  margin-bottom:-40px;
+}
+h2 {
+  font-weight:500;
+  text-align:center;
+  font-style:italic;
+  animation: sub linear both;
+  animation-range:0vh 70vh;
+  animation-timeline:scroll();
+  margin-top:25px;
+  font-style: italic
+}
+.parallax p {
+  text-align:justify;
+  opacity:0;
+  padding:10px;
+}
+.in-view {
+  animation: imageEnter 0.6s 1 forwards;
+}
+.parallax {
+  /* The image used */
+  padding:10%;
+  margin:0;
+  padding-top:50px;
+  /* Full height */
+  height: auto;
+  width: calc(100% - 20%);
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:300px;
+}
+.parallax p {
+  border-left: solid 2px orange;
+}
+@media (prefers-color-scheme:dark) {/*DARK*/
+  header {
+    filter:brightness(0.8);
+    background-image:url(images/darkPerlin.png);
+  }
+  h1 {
+    color:white;
+  }
+  a {
+    color:orange;
+  }
+  h1, h2 {
+    text-shadow:0px 6px 35px white;
+    filter:brightness(1);
+  }
+  body {
+    background-color: #1e232a;
+    
+  }
+  .parallax {
+    background-color:#1e232a;
+    background-image: url("images/darkLogo.png");
+  }
+  .parallax p {
+    background-color: #77777777;
+  }
+}
+@media (prefers-color-scheme:light) {/*LIGHT*/
+  header {
+    filter:brightness(1.4);
+    background-image: linear-gradient(#777777,rgba(0,0,0,0)),url(images/lightPerlin.png);
+  }
+  body {
+    color:black;
+    background-color:#a5a5a5;
+  }
+  .parallax {
+    background-color:#a5a5a5;
+    background-image:url(images/lightLogo.png)
+  }
+  h1, h2 {
+    text-shadow:0 6px 20px black;
+    color:white;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes foldDown {
+  from {
+    transform:rotateY(90deg) rotateZ(-90deg);
+    opacity:0.1;
+  }
+  50% {
+    transform:rotateY(90deg) rotateZ(auto);
+  }
+  to {
+    transform:rotateY(0) rotateZ(0);
+    opacity:1;
+    
+  }
+}
+@keyframes imageEnter {
+  from {
+    opacity:0;
+    clip-path:inset(0% 100% 0% 0%);
+  }
+  to {
+    opacity:1;
+    clip-path:inset(0% 0% 0% 0%);
+  }
+}
+@keyframes head {
+  from {
+    height:100vh;
+  }
+  to {
+    height:30vh;
+  }
+}
+@keyframes title { 
+  from { 
+    transform: none; 
+    font-size:5em;
+  } to {
+    transform: matrix3d(1,0,0,0, 
+    0,1,0,-0.003, 
+    0,0,1,0, 
+    0,0,0,1);
+    font-size:3em;
+  } 
+}
+@keyframes sub {
+  from {
+    transform:none;
+    font-size:1.9em;
+  } to {
+    font-size:1.4em;
+  }
+}
